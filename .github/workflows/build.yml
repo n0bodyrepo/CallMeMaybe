@@ -1,0 +1,23 @@
+name: Build Tweak
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Theos
+        uses: NightwindDev/theos-action@main
+
+      - name: Build package
+        run: |
+          export THEOS=$THEOS
+          make package FINALPACKAGE=1 ARCHS="arm64e" TARGET="iphone:clang:17.4:15.0"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CallMeMaybe-deb
+          path: packages/*.deb
