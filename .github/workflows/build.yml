@@ -10,10 +10,12 @@ jobs:
 
       - name: Install Theos
         uses: Randomblock1/theos-action@v1
+        with:
+          theos-sdks: 'https://github.com/theos/sdks'
 
       - name: Build package
         run: |
-          make package FINALPACKAGE=1 ARCHS="arm64e" TARGET="iphone:clang:17.4:15.0"
+          make package FINALPACKAGE=1 ARCHS="arm64e" TARGET="iphone:clang:17.5:15.0"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
